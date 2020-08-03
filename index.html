@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="generatePinInput" class="form-control" type="text">
+                    <button id="generateButton" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div  class="col-md-6">
+                 
+                <div class="input-section half-width">
+                    <input id="testPinInput" class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              <div   class="button" onclick="calculate(this.innerText)">7</div>
+                              <div class="button" onclick="calculate(this.innerText)">8</div>
+                              <div class="button" onclick="calculate(this.innerText)">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" onclick="calculate(this.innerText)">4</div>
+                              <div class="button" onclick="calculate(this.innerText)">5</div>
+                              <div class="button" onclick="calculate(this.innerText)">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button" onclick="calculate(this.innerText)">1</div>
+                              <div class="button" onclick="calculate(this.innerText)">2</div>
+                              <div class="button" onclick="calculate(this.innerText)">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div id="backspace" class="button"><</div>
+                                <div class="button" onclick="calculate(this.innerText)">0</div>
+                                <div id="clear" class="button">C</div>
+                            </div>
+                            <div>
+                                <button type="submit" id="submitBtn" class="submit-btn">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="pinUnMatch" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="pinMatch" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+
+    <script>
+        //generate pin
+        document.getElementById('generateButton').addEventListener('click',function(){
+            var generatePin = Math.floor( 1000 + Math.random()*9000);
+            document.getElementById('generatePinInput').value = generatePin;
+        })
+        
+       function calculate(x){
+        var output=  document.getElementById('testPinInput');
+        output.value += x;
+       }
+
+       document.getElementById('submitBtn').addEventListener('click',function(){
+           var generatePinValue = document.getElementById('generatePinInput').value;
+           var testPinValue = document.getElementById('testPinInput').value;
+
+           if (testPinValue == generatePinValue){
+               document.getElementById('pinMatch').style.display = 'block';
+               document.getElementById('pinUnMatch').style.display = 'none';
+
+        
+           }
+           else {
+               document.getElementById('pinUnMatch').style.display = 'block';
+               document.getElementById('pinMatch').style.display = 'none';
+           }
+
+        // document.getElementById('testPinInput').value ='';
+
+
+       })
+
+       document.getElementById('clear').addEventListener('click',function(){
+           document.getElementById('testPinInput').value = '';
+       })
+       document.getElementById('backspace').addEventListener('click',function(){
+           var input = document.getElementById('testPinInput').value.slice(0,-1);
+           document.getElementById('testPinInput').value = input;
+       })
+
+
+    
+    
+
+    </script>
+</body>
+</html>
