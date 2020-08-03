@@ -44,7 +44,7 @@
                             </div>
                             <div>
                                 <button type="submit" id="submitBtn" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <p id="tryAlert" class="action-left"> <span id="tryLeft" >3 tries left</span> </p>
                             </div>
                     </div>
                 </div>
@@ -57,12 +57,12 @@
     </div>
 
     <script>
-        //generate pin
+        //generate pin part
         document.getElementById('generateButton').addEventListener('click',function(){
             var generatePin = Math.floor( 1000 + Math.random()*9000);
             document.getElementById('generatePinInput').value = generatePin;
         })
-        
+        // number showing and submit part
        function calculate(x){
         var output=  document.getElementById('testPinInput');
         output.value += x;
@@ -71,22 +71,25 @@
        document.getElementById('submitBtn').addEventListener('click',function(){
            var generatePinValue = document.getElementById('generatePinInput').value;
            var testPinValue = document.getElementById('testPinInput').value;
-
+            
            if (testPinValue == generatePinValue){
                document.getElementById('pinMatch').style.display = 'block';
                document.getElementById('pinUnMatch').style.display = 'none';
-
+               
         
            }
            else {
                document.getElementById('pinUnMatch').style.display = 'block';
                document.getElementById('pinMatch').style.display = 'none';
+             
            }
 
-        // document.getElementById('testPinInput').value ='';
+        document.getElementById('testPinInput').value ='';
+
 
 
        })
+       // clear and backspace part
 
        document.getElementById('clear').addEventListener('click',function(){
            document.getElementById('testPinInput').value = '';
